@@ -24,7 +24,7 @@ export async function postCreateOrUpdateEnrollment(req: AuthenticatedRequest, re
 
     return res.sendStatus(httpStatus.OK);
   } catch (error) {
-    return res.sendStatus(httpStatus.BAD_REQUEST);
+    return res.status(httpStatus.BAD_REQUEST).send({ message: error.message });
   }
 }
 
@@ -33,14 +33,12 @@ export async function getAddressFromCEP(req: AuthenticatedRequest, res: Response
 
   try {
     const address = await enrollmentsService.getAddressFromCEP(cep);
-    const shortAddress= {
-    
+    const shortAddress = {
       logradouro: address.data.logradouro,
       complemento: address.data.complemento,
       bairro: address.data.bairro,
       cidade: address.data.localidade,
       uf: address.data.uf,
-    
     };
 
     res.status(httpStatus.OK).send(shortAddress);
