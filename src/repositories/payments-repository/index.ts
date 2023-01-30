@@ -1,6 +1,12 @@
 import { prisma } from "@/config";
 import { Payments } from "@/protocols";
 
+async function getPayments(ticketId: number) {
+  const payments = await prisma.payment.findFirst({ where: { ticketId } });
+
+  return payments;
+}
+
 async function postPayments(payments: Payments) {
   await prisma.payment.create({
     data: {
@@ -14,6 +20,7 @@ async function postPayments(payments: Payments) {
 
 const paymentRepository = {
   postPayments,
+  getPayments,
 };
 
 export default paymentRepository;
