@@ -8,11 +8,19 @@ export async function fetchTypesOfTickets() {
 }
 
 export async function fetchTickets(userId: number) {
-  const ticketList = await ticketRepository.getTickets(userId);
+  const ticket = await ticketRepository.getTickets(userId);
 
-  if (!ticketList) throw notFoundError();
+  if (!ticket) throw notFoundError();
 
-  return ticketList;
+  return ticket;
+}
+
+export async function checkIfTicketExist(ticketId: number) {
+  const ticket = await ticketRepository.getTicketsById(ticketId);
+
+  if (!ticket) throw notFoundError();
+
+  return ticket;
 }
 
 export async function checkIfTicketTypeExists(ticketTypeId: number) {

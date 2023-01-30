@@ -1,5 +1,5 @@
 import { prisma } from "@/config";
-import { Ticket, TicketStatus, TicketType } from "@prisma/client";
+import { TicketStatus, TicketType } from "@prisma/client";
 
 async function getAllTypesOfTickets(): Promise<TicketType[]> {
   const listOfTicketTypes = await prisma.ticketType.findMany();
@@ -13,6 +13,12 @@ async function getTickets(userId: number) {
   });
 
   return ticketList;
+}
+
+async function getTicketsById(ticketId: number) {
+  const ticket = await prisma.ticket.findUnique({ where: { id: ticketId } });
+
+  return ticket;
 }
 
 async function getTicketTypeById(ticketTypeId: number) {
@@ -29,6 +35,7 @@ const ticketRepository = {
   getTickets,
   getTicketTypeById,
   postTickets,
+  getTicketsById,
 };
 
 export default ticketRepository;
