@@ -24,3 +24,13 @@ export async function validTicket(req: AuthenticatedRequest, res: Response, next
 
   next();
 }
+
+export async function validTicketInput(req: AuthenticatedRequest, res: Response, next: NextFunction) {
+  const ticketId = Number(req.query.ticketId);
+
+  if (isNaN(ticketId)) {
+    return res.sendStatus(httpStatus.BAD_REQUEST);
+  }
+
+  res.sendStatus(200);
+}
