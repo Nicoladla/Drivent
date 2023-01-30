@@ -1,5 +1,6 @@
 import ticketRepository from "@/repositories/tickets-repository";
 import { notFoundError } from "@/errors";
+import { TicketStatus } from "@prisma/client";
 
 export async function fetchTypesOfTickets() {
   const listOfTicketTypes = ticketRepository.getAllTypesOfTickets();
@@ -8,9 +9,18 @@ export async function fetchTypesOfTickets() {
 
 export async function fetchTickets(userId: number) {
   const ticketList = await ticketRepository.getTickets(userId);
-  console.log(ticketList);
+
   if (!ticketList) throw notFoundError();
-  console.log("possou 2");
 
   return ticketList;
+}
+
+export async function checkIfTicketTypeExists(ticketTypeId: number) {
+  const ticketTypeExist = await ticketRepository.getTicketTypeById(ticketTypeId);
+
+  if (!ticketTypeExist) throw { type: "bad_request" };
+}
+
+export async function insertTickets(ticketTypeId: number, enrollmentId: number, status: TicketStatus) {
+  ticketRepository.postTickets(ticketTypeId, enrollmentId, status);
 }

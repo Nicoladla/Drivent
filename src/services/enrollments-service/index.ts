@@ -51,6 +51,8 @@ async function checkIfEnrollmentExists(userId: number) {
   const enrollmentExist = await enrollmentRepository.findEnrollmentById(userId);
 
   if (!enrollmentExist) throw notFoundError();
+
+  return enrollmentExist;
 }
 
 type GetOneWithAddressByUserIdResult = Omit<Enrollment, "userId" | "createdAt" | "updatedAt">;
