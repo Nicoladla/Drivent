@@ -8,8 +8,9 @@ export async function fetchTypesOfTickets() {
 
 export async function fetchTickets(userId: number) {
   const ticketList = await ticketRepository.getTickets(userId);
-
+  console.log(ticketList);
   if (!ticketList) throw notFoundError();
+  console.log("possou 2");
 
   return ticketList;
 }

@@ -14,7 +14,7 @@ export async function getTickets(req: AuthenticatedRequest, res: Response) {
   const { userId } = req;
 
   await enrollmentsService.checkIfEnrollmentExists(userId);
-
+  console.log("possou 1");
   const ticket = await fetchTickets(userId);
 
   res.status(httpStatus.OK).send(ticket);

@@ -18,12 +18,13 @@ export async function getEnrollmentByUser(req: AuthenticatedRequest, res: Respon
 export async function postCreateOrUpdateEnrollment(req: AuthenticatedRequest, res: Response) {
   try {
     await enrollmentsService.createOrUpdateEnrollmentWithAddress({
-      ...req.body,
+      ...req.body, birthday: new Date(req.body.birthday),
       userId: req.userId,
     });
 
     return res.sendStatus(httpStatus.OK);
   } catch (error) {
+    console.log(error.message);
     return res.sendStatus(httpStatus.BAD_REQUEST);
   }
 }
