@@ -21,7 +21,7 @@ export async function getTickets(req: AuthenticatedRequest, res: Response) {
 }
 
 export async function postTickets(req: AuthenticatedRequest, res: Response) {
-  const ticketTypeId = Number(req.body.ticketTypeId);
+  const { ticketTypeId } = req.body;
   const { userId } = req;
   const status = "RESERVED";
 
