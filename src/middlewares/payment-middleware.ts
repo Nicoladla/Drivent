@@ -32,5 +32,5 @@ export async function validTicketInput(req: AuthenticatedRequest, res: Response,
     return res.sendStatus(httpStatus.BAD_REQUEST);
   }
 
-  res.sendStatus(200);
+  next();
 }
