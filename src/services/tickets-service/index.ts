@@ -32,3 +32,7 @@ export async function checkIfTicketTypeExists(ticketTypeId: number) {
 export async function insertTickets(ticketTypeId: number, enrollmentId: number, status: TicketStatus) {
   ticketRepository.postTickets(ticketTypeId, enrollmentId, status);
 }
+
+export async function updateTickets(ticketId: number, status: TicketStatus) {
+  await ticketRepository.updateTickets(ticketId, status);
+}

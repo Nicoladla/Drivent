@@ -30,12 +30,17 @@ async function postTickets(ticketTypeId: number, enrollmentId: number, status: T
   await prisma.ticket.create({ data: { ticketTypeId, enrollmentId, status } });
 }
 
+async function updateTickets(ticketId: number, status: TicketStatus) {
+  await prisma.ticket.update({ where: { id: ticketId }, data: { status } });
+}
+
 const ticketRepository = {
   getAllTypesOfTickets,
   getTickets,
   getTicketTypeById,
   postTickets,
   getTicketsById,
+  updateTickets,
 };
 
 export default ticketRepository;
